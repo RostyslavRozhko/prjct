@@ -1,0 +1,22 @@
+<div class="col-md-4 col-sm-6">
+    <div class="idea-card">
+        <a href="/ideas/<%=idea.url%>">
+            <div class="title"><%=idea.title%></div>
+        </a>
+        <div class="author-cont-cont">
+            <% if(idea.author.url){%>
+                <div class="author-cont">
+                    <a href="/partners/<%=idea.author.url%>" class="navbar-brand navbar-logo">by</a>
+                    <a href="/partners/<%=idea.author.url%>"  class="navbar-brand navbar-logo"><%=idea.author.name%></a>
+                </div>
+            <%}%>
+        </div>
+        <div class="description"><%=idea.shortDesc%></div>
+        <div class="skills">
+            <div class="title-skills">Skills required:</div>
+            <% idea.skills.forEach(function (one) { %>
+                <span class="skill"><%=one%></span>
+            <% }) %>
+        </div>
+    </div>
+</div>

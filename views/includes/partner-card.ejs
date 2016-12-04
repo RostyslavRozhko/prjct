@@ -1,0 +1,25 @@
+<div class="col-md-4 col-sm-6">
+    <div class="idea-card">
+        <a href="/partners/<%=partner.url%>">
+            <div class="img-cont">
+                <% if(partner.img) {%>
+                    <img class="user-image" src="<%=partner.img%>">
+                <%} else {%>
+                    <img class="user-image" src="/images/account-icon-8.png">
+                <% } %>
+            </div>
+        </a>
+        <div class="name">
+            <a href="/partners/<%=partner._id%>">
+                <h3><%=partner.name%></h3>
+            </a>
+        </div>
+        <div class="description"><%=partner.desc%></div>
+        <div class="skills">
+            <div class="title-skills">Skills:</div>
+            <% partner.skills.forEach(function (one) { %>
+                <span class="skill"><%=one%></span>
+            <% }) %>
+        </div>
+    </div>
+</div>

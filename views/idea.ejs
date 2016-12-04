@@ -1,0 +1,66 @@
+<% var title = title %>
+<%include includes/head.ejs %>
+
+<body>
+<div class="container-fluid border-bottom">
+    <div class="container">
+
+        <% include includes/navbar.ejs %>
+
+    </div>
+</div>
+<div class="container-fluid profile-info">
+    <div class="container profile-info-inner">
+        <div class="row">
+            <div class="col-md-8 idea-page">
+                <div class="title"><%=idea.title%></div>
+                <input type="input" class="edit-title" placeholder="Enter name">
+                <div class="description" id="desc-short"><%=idea.shortDesc%></div>
+                <textarea class="edit-textarea-short edit-textarea" placeholder="Add short information about your idea"></textarea>
+                <div class="skills">
+                    <div class="title-skills">Skills required:</div>
+                    <div id="skills-list">
+
+                    </div>
+                    <div class="in-cont"><input class="add-skill" placeholder="Add skill"><span class="add-btn"></span></div>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1 text-info-cont">
+                <a href="/partners/<%=idea.author.url%>">
+                    <% if(idea.author.img) {%>
+                    <img class="profile-picture" src="<%=idea.author.img%>">
+                    <%} else {%>
+                    <img class="profile-picture" src="/images/account-icon-8.png">
+                    <% } %>
+                </a>
+                <div class="align-center">
+                    <a href="/partners/<%=idea.author.url%>">
+                        <span class="navbar-logo"><%=idea.author.name%></span>
+                    </a>
+                </div>
+                <a class="btn btn-a" id="edit-btn">Edit</a>
+                <a class="btn btn-a" id="save-btn">Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container desc-cont">
+        <div class="description-title">Description</div>
+        <div class="description" id="desc-long"><%=idea.longDesc%></div>
+        <textarea class="edit-textarea-long edit-textarea" placeholder="Enter information about your idea in details"></textarea>
+    </div>
+</div>
+<script type="text/javascript">
+    var skillsArr = [];
+    <% idea.skills.forEach(function (elem) { %>
+        skillsArr.push("<%=elem%>");
+    <%})%>
+</script>
+
+<% include includes/footer.ejs %>
+
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/idea.js"></script>
+</body>
+</html>

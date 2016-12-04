@@ -1,0 +1,73 @@
+<% include includes/head.ejs %>
+
+<body>
+<div class="container-fluid border-bottom">
+    <div class="container">
+
+        <% include includes/navbar.ejs %>
+
+    </div>
+</div>
+<div class="container-fluid profile-info">
+    <div class="container profile-info-inner">
+        <div class="row">
+            <div class="col-md-4">
+                <% if(partner.img) {%>
+                    <img class="profile-picture" src="<%=partner.img%>">
+                <%} else {%>
+                    <img class="profile-picture" src="/images/account-icon-8.png">
+                <% } %>
+            </div>
+            <div class="col-md-7 col-md-offset-1 text-info-cont">
+                <div class="text-info">
+                    <span class="navbar-logo" id="profile-name"><%=partner.name%></span>
+                    <input class="edit-name" type="text">
+                    <span class="some-btn edit-btn"></span>
+                    <span class="some-btn save-btn"></span>
+                    <div class="description" id="description"><%=partner.desc%></div>
+                    <input type="text" class="edit-desc" placeholder="Add information about you"/>
+                    <div id="skills-list">
+                    </div>
+                    <div class="in-cont"><input class="add-skill" placeholder="Add skill"><span class="add-btn"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 btn-con col-md-offset-3">
+                <a class="btn btn-a">Post idea</a>
+            </div>
+            <div class="col-md-2 btn-con col-md-offset-2">
+                <a class="btn btn-a">Find project</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="list-section my-ideas-list">
+        <div class="container">
+            <div class="section-title">My ideas</div>
+            <div class="line-cont">
+                <div class="line"></div>
+            </div>
+            <div class="list">
+                <div class="row">
+
+                    <% partner.ideas.forEach(function (idea) {
+                        var idea = idea; %>
+                    <% include includes/idea-card.ejs %>
+                    <% })%>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include includes/footer.ejs %>
+
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/profile.js"></script>
+</body>
+</html>

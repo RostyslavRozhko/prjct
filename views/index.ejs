@@ -1,0 +1,88 @@
+<% var title = title %>
+<%include includes/head.ejs %>
+
+<body>
+<div class="container-fluid">
+  <div class="background-img">
+    <div class="container bg-inner">
+
+      <% include includes/navbar.ejs %>
+
+    </div>
+    <p>Ready to start your project? Find your partner in crime that complements your skillset</p>
+    <div class="row btn-row">
+      <div class="col-md-3"></div>
+      <div class="col-md-2 btn-con">
+        <a href="/partners" class="btn btn-a">I hava an idea</a>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2 btn-con">
+        <a href="ideas" class="btn btn-a">I want to find project</a>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section-title">How it works</div>
+    <div class="line-cont">
+      <div class="line"></div>
+    </div>
+    <div class="section container-fluid">
+      <div class="col-md-7 text-cont">
+        <h3>Post project</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia turpis sed dapibus tincidunt. Sed posuere at metus vestibulum viverra. Fusce eu porta justo. Donec luctus erat a finibus interdum. Phasellus libero mauris, dignissim quis ultrices id, volutpat et neque. Sed ornare vestibulum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+      </div>
+      <div class="col-md-5 img-cont">
+        <img  src="images/img1.png">
+      </div>
+    </div>
+    <div class="section container-fluid">
+      <div class="col-md-7 text-cont pull-right">
+        <h3>Find a partner</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia turpis sed dapibus tincidunt. Sed posuere at metus vestibulum viverra. Fusce eu porta justo. Donec luctus erat a finibus interdum. Phasellus libero mauris, dignissim quis ultrices id, volutpat et neque. Sed ornare vestibulum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+      </div>
+      <div class="col-md-5 img-cont">
+        <img src="images/img2.png">
+      </div>
+    </div>
+    <div class="section container-fluid">
+      <div class="col-md-7 text-cont">
+        <h3>Create a project together</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia turpis sed dapibus tincidunt. Sed posuere at metus vestibulum viverra. Fusce eu porta justo. Donec luctus erat a finibus interdum. Phasellus libero mauris, dignissim quis ultrices id, volutpat et neque. Sed ornare vestibulum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi efficitur enim eget neque rutrum, quis tempor erat placerat. Cras id diam mauris.</p>
+      </div>
+      <div class="col-md-5 img-cont">
+        <img src="images/img3.png">
+      </div>
+    </div>
+  </div>
+  <div class="list-section container-fluid">
+    <div class="container">
+      <div class="section-title">Latest ideas</div>
+      <div class="line-cont">
+        <div class="line"></div>
+      </div>
+      <div class="list">
+        <div class="row">
+
+          <% ideas.forEach(function (idea) {
+            var idea = idea; %>
+          <% include includes/idea-card.ejs %>
+          <% })%>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="last-section">
+      <h2>Are you ready for new projects?</h2>
+      <a href="/signup" class="btn btn-a btn-signup">Sign up</a>
+    </div>
+  </div>
+</div>
+
+<% include includes/footer.ejs %>
+
+<!--<script src="javascripts/jquery.min.js"></script>-->
+</body>
+</html>

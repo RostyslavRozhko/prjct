@@ -5,9 +5,13 @@
 <div class="container-fluid">
   <div class="background-img">
     <div class="container bg-inner">
-
+      <% if(authUser) {
+        console.log(authUser);
+      %>
+      <% include includes/navbar-logined.ejs %>
+      <% } else {%>
       <% include includes/navbar.ejs %>
-
+      <%}%>
     </div>
     <p>Ready to start your project? Find your partner in crime that complements your skillset</p>
     <div class="row btn-row">
@@ -76,7 +80,7 @@
   <div class="container">
     <div class="last-section">
       <h2>Are you ready for new projects?</h2>
-      <a href="/signup" class="btn btn-a btn-signup">Sign up</a>
+      <a href="/register" class="btn btn-a btn-signup">Sign up</a>
     </div>
   </div>
 </div>

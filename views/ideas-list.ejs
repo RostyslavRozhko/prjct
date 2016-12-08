@@ -3,9 +3,13 @@
 <body>
 <div class="container-fluid border-bottom">
     <div class="container">
-
-        <% include includes/navbar.ejs%>
-
+        <% if(authUser) {
+        var authUser = authUser;
+        %>
+        <% include includes/navbar-logined.ejs %>
+        <% } else {%>
+        <% include includes/navbar.ejs %>
+        <%}%>
     </div>
 </div>
 

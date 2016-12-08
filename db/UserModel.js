@@ -1,16 +1,21 @@
-var db = require('mongoose');
+var mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
-var userSchema = new db.Schema({
-        _id: db.Schema.Types.ObjectId,
+var userSchema = new mongoose.Schema({
+        _id: mongoose.Schema.Types.ObjectId,
         desc: String,
         email: String,
+        password: String,
         img: String,
-        ideas: [{ type: db.Schema.Types.ObjectId, ref: 'Ideas' }],
+        ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ideas' }],
         skills: Array,
         name: String,
         url: String
     },
     {collection: 'users'});
 
+userSchema.plugin(passportLocalMongoose);
 
-module.exports = db.model('Users', userSchema);
+
+module.exports = mongoose.model('Users', userSchema);

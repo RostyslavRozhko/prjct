@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
         if(err){
             console.log("Error")
         } else {
-            res.render('ideas-list', { title: 'Ideas', ideas: ideas });
+            res.render('ideas-list', { title: 'Ideas', ideas: ideas, authUser: req.user });
         }
     });
 
@@ -19,7 +19,7 @@ router.get('/:id', function (req, res, next) {
         if(err){
             console.log("Error")
         } else {
-            res.render('idea', { title: idea.title, idea: idea });
+            res.render('idea', { title: idea.title, idea: idea, authUser: req.user });
         }
     });
 });

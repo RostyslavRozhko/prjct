@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
         if(err){
             console.log("Error")
         } else {
-            res.render('partners-list', { title: 'Partners', partners: partners });
+            res.render('partners-list', { title: 'Partners', partners: partners, authUser: req.user });
         }
     });
 
@@ -19,7 +19,7 @@ router.get('/:id', function (req, res, next) {
         if(err){
             console.log("Error")
         } else {
-            res.render('profile', {title: id, partner: partner})
+            res.render('profile', {title: id, partner: partner, authUser: req.user})
         }
     });
 

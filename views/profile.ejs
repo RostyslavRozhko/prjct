@@ -36,16 +36,22 @@
             </div>
         </div>
     </div>
+    <%
+    console.log("auth", authUser._id);
+    console.log("partner", partner._id);
+    console.log(authUser._id+"" == partner._id+"");
+    if(authUser && authUser._id+"" == partner._id+""){ %>
     <div class="container">
         <div class="row">
             <div class="col-md-2 btn-con col-md-offset-3">
                 <a class="btn btn-a">Post idea</a>
             </div>
             <div class="col-md-2 btn-con col-md-offset-2">
-                <a class="btn btn-a">Find project</a>
+                <a class="btn btn-a" href="/ideas">Find project</a>
             </div>
         </div>
     </div>
+    <%}%>
 </div>
 <div class="container-fluid">
     <div class="list-section my-ideas-list">
@@ -69,6 +75,13 @@
 </div>
 
 <% include includes/footer.ejs %>
+
+<script type="text/javascript">
+    var skillsArr = [];
+    <% partner.skills.forEach(function (elem) { %>
+    skillsArr.push("<%=elem%>");
+    <%})%>
+</script>
 
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script type="text/javascript" src="/javascripts/profile.js"></script>

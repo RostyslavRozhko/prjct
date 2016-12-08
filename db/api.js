@@ -36,7 +36,6 @@ exports.getIdeaByName = function (name, callback) {
             if(err){
                 onErr(err,callback);
             }else{
-                console.log(JSON.stringify(idea, null, 4));
                 callback(null, idea);
             }
         })
@@ -61,7 +60,6 @@ exports.getPartnerByName = function(name, callback){
             if(err){
                 onErr(err,callback);
             }else{
-                console.log(JSON.stringify(user, null, 4));
                 callback(null, user);
             }
         })

@@ -13,14 +13,6 @@ $(function(){
 
     var $skillNode = '<span><span class="skill">HTML5</span><span class="delete-btn"></span></span>';
 
-    var skillsArr = [];
-
-    skillsArr.push('HTML5');
-    skillsArr.push('Javascript');
-    skillsArr.push('Web programming');
-    skillsArr.push('Node.js');
-    skillsArr.push('CSS3');
-    skillsArr.push('Java');
 
     if(name == "" || skillsArr.length == 0){
         editProfile();

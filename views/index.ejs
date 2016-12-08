@@ -6,7 +6,7 @@
   <div class="background-img">
     <div class="container bg-inner">
       <% if(authUser) {
-        console.log(authUser);
+        var authUser = authUser;
       %>
       <% include includes/navbar-logined.ejs %>
       <% } else {%>

@@ -37,14 +37,11 @@
         </div>
     </div>
     <%
-    console.log("auth", authUser._id);
-    console.log("partner", partner._id);
-    console.log(authUser._id+"" == partner._id+"");
     if(authUser && authUser._id+"" == partner._id+""){ %>
     <div class="container">
         <div class="row">
             <div class="col-md-2 btn-con col-md-offset-3">
-                <a class="btn btn-a">Post idea</a>
+                <a class="btn btn-a" href="/partners/<%=partner.url%>/post#post">Post idea</a>
             </div>
             <div class="col-md-2 btn-con col-md-offset-2">
                 <a class="btn btn-a" href="/ideas">Find project</a>
@@ -63,10 +60,14 @@
             <div class="list">
                 <div class="row">
 
-                    <% partner.ideas.forEach(function (idea) {
+
+                    <%if(partner.ideas.length == 0) { %>
+                    <p class="no-projects">There are no projects yet</p>
+                    <%} else {%>
+                    <% partner.ideas.reverse().forEach(function (idea) {
                         var idea = idea; %>
                     <% include includes/idea-card.ejs %>
-                    <% })%>
+                    <% }) }%>
 
                 </div>
             </div>

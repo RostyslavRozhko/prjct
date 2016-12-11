@@ -9,7 +9,15 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res, next) {
-    var user = new User({_id:  mongoose.Types.ObjectId(), email: req.body.email, password: req.body.password, name: req.body.username, url: req.body.username.replace(/\s/g,'').toLowerCase(), desc: req.body.description, img:null});
+    var user = new User({
+        _id:  mongoose.Types.ObjectId(),
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.username,
+        url: req.body.username.replace(/\s/g,'').toLowerCase(),
+        desc: req.body.description,
+        img:null
+    });
     user.save(function (err) {
         return err
             ? next(err)

@@ -1,0 +1,103 @@
+<% include includes/head.ejs %>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<body>
+<div class="container-fluid border-bottom">
+    <div class="container">
+        <% if(authUser) { %>
+        <% include includes/navbar-logined.ejs %>
+        <% } else {%>
+        <% include includes/navbar.ejs %>
+        <%}%>
+
+    </div>
+</div>
+<div class="container-fluid profile-info">
+    <div class="container profile-info-inner">
+        <div class="row">
+            <div class="col-md-4">
+                <% if(partner.img) {%>
+                <img class="profile-picture" src="<%=partner.img%>">
+                <%} else {%>
+                <img class="profile-picture" src="/images/account-icon-8.png">
+                <% } %>
+            </div>
+            <div class="col-md-7 col-md-offset-1 text-info-cont">
+                <div class="text-info">
+                    <span class="navbar-logo" id="profile-name"><%=partner.name%></span>
+                    <input class="edit-name" type="text">
+                    <span class="some-btn edit-btn"></span>
+                    <span class="some-btn save-btn"></span>
+                    <div class="description" id="description"><%=partner.desc%></div>
+                    <input type="text" class="edit-desc" placeholder="Add information about you"/>
+                    <div id="skills-list">
+                    </div>
+                    <div class="in-cont" id="in-cont"><input class="add-skill" placeholder="Add skill"><span class="add-btn" id="add-btn"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid">
+    <div class="list-section my-ideas-list" id="post">
+        <div class="container">
+            <div class="section-title">Post idea</div>
+            <div class="line-cont">
+                <div class="line"></div>
+            </div>
+            <div class="list">
+                <div class="row">
+                    <%
+                    if(authUser && authUser._id+"" == partner._id+""){ %>
+                    <div class="panel panel-login">
+                        <div class="panel-body idea-panel-body">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Application name" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="shortDesc" id="shortDesc" tabindex="1" class="form-control" placeholder="Short description" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="longDesc" id="longDesc" tabindex="2" class="form-control" placeholder="Full description">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="in-cont display-block"><input class="add-skill" id="idea-add-skill" placeholder="Add skill"><span class="add-btn" id="idea-add-btn"></span></div>
+                                    <div id="idea-skills-list">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="row idea-btn-row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="idea-post" id="idea-post" tabindex="4" class="form-control btn btn-register" value="Post idea">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include includes/footer.ejs %>
+
+<script type="text/javascript">
+    var skillsArr = [];
+    <% partner.skills.forEach(function (elem) { %>
+    skillsArr.push("<%=elem%>");
+    <%})%>
+</script>
+
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/profile.js"></script>
+</body>
+</html>

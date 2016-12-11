@@ -9,7 +9,7 @@ $(function(){
 
     var SKILLS_LIST = $('#skills-list');
 
-    var addSkill = $('.in-cont');
+    var addSkill = $('#in-cont');
 
     var $skillNode = '<span><span class="skill">HTML5</span><span class="delete-btn"></span></span>';
 
@@ -68,7 +68,7 @@ $(function(){
 
         addSkill.show();
 
-        $('.add-btn').click(function () {
+        $('#add-btn').click(function () {
             skillsArr.push($('.add-skill').val());
             $('.add-skill').val("");
             showSkills(skillsArr)
@@ -99,6 +99,69 @@ $(function(){
 
     function showBtn(btn) {
         btn.css('display', 'inline-block')
+    }
+
+    var IDEA_SKILLS_LIST = $('#idea-skills-list');
+
+    var ideaSkills = [];
+
+    showIdeaSkills(ideaSkills);
+
+    function showIdeaSkills(array){
+        IDEA_SKILLS_LIST.empty();
+        array.forEach(function (elem, index) {
+            var node = $($skillNode);
+            node.find('.skill').text(elem);
+            var deleteBtn = node.find('.delete-btn');
+
+            deleteBtn.click(function(){
+                ideaSkills.splice(index, 1);
+                showIdeaSkills(array);
+            });
+            showBtn(deleteBtn);
+
+            IDEA_SKILLS_LIST.append(node);
+        })
+    }
+
+    $('#idea-add-btn').click(function () {
+        ideaSkills.push($('#idea-add-skill').val());
+        $('#idea-add-skill').val("");
+        showIdeaSkills(ideaSkills)
+    });
+
+
+    $('#idea-post').click(function () {
+        var URL = '/ideas/post';
+        var data = {
+            title: $('#name').val(),
+            shortDesc: $('#shortDesc').val(),
+            longDesc: $('#longDesc').val(),
+            skills: ideaSkills
+        };
+        backendPost(URL, data, function (err, data) {
+            if(err){
+                console.log(err)
+            } else {
+                window.location.href = data.url;
+            }
+        })
+    });
+
+
+    function backendPost(url, data, callback) {
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType : 'application/json',
+            data: JSON.stringify(data),
+            success: function(data){
+                callback(null, data);
+            },
+            error: function() {
+                callback(new Error("Ajax Failed"));
+            }
+        })
     }
 
 });

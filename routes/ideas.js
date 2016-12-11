@@ -6,13 +6,25 @@ var Idea = require('../db/IdeaModel');
 var User = require('../db/UserModel');
 
 router.get('/', function(req, res, next) {
-    db.getAllIdeas(function (err, ideas) {
-        if(err){
-            console.log("Error")
-        } else {
-            res.render('ideas-list', { title: 'Ideas', ideas: ideas, authUser: req.user });
-        }
-    });
+    var qu = req.query.search;
+    var query = new RegExp(qu, "i");
+    if (!query) {
+        db.getAllIdeas(function (err, ideas) {
+            if (err) {
+                console.log("Error")
+            } else {
+                res.render('ideas-list', {title: 'Ideas', ideas: ideas, authUser: req.user});
+            }
+        });
+    } else {
+        db.getSearchIdeas(query, function (err, ideas) {
+            if (err) {
+                console.log("Error")
+            } else {
+                res.render('ideas-list', {title: 'Ideas', ideas: ideas, authUser: req.user, query: qu});
+            }
+        });
+    }
 
 });
 

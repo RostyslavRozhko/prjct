@@ -14,6 +14,19 @@ exports.getAllIdeas = function (callback) {
         })
 };
 
+exports.getSearchIdeas = function (query, callback) {
+    Ideas.find({skills: query})
+        .populate('author')
+        .sort('-createAt')
+        .exec(function (err, ideas) {
+            if(err){
+                onErr(err,callback);
+            }else{
+                callback(null, ideas);
+            }
+        })
+};
+
 
 exports.getIndexIdeas = function (callback) {
     Ideas.find({})

@@ -40,8 +40,13 @@
                         <span class="navbar-logo"><%=idea.author.name%></span>
                     </a>
                 </div>
-                <a class="btn btn-a" id="edit-btn">Edit</a>
-                <a class="btn btn-a" id="save-btn">Save</a>
+                <%if(authUser && authUser._id+"" == idea.author._id+"") {%>
+                    <a class="btn btn-a" id="edit-btn">Edit</a>
+                    <a class="btn btn-a" id="save-btn">Save</a>
+                    <a class="btn btn-a" id="delete-btn">Delete idea</a>
+                <%} else {%>
+                    <a class="btn btn-a" id="send-btn">Send a message</a>
+                <%}%>
             </div>
         </div>
     </div>
@@ -58,6 +63,7 @@
     <% idea.skills.forEach(function (elem) { %>
         skillsArr.push("<%=elem%>");
     <%})%>
+    var _id = "<%=idea._id%>"
 </script>
 
 <% include includes/footer.ejs %>

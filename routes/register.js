@@ -5,7 +5,7 @@ var mongoose  = require('../db/db');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-    res.render('register', { });
+    res.render('register', { title: 'Register'});
 });
 
 router.post('/', function(req, res, next) {

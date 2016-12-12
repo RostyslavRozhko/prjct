@@ -83,11 +83,13 @@ $(function(){
         showBtn(editBtn);
 
         editName.hide();
-        name.text(editName.val());
+        var editedName = editName.val();
+        name.text(editedName);
         name.show();
 
         editDesc.hide();
-        description.text(editDesc.val());
+        var editedDesc = editDesc.val();
+        description.text(editedDesc);
         description.show();
 
         $('.delete-btn').each(function () {
@@ -95,6 +97,21 @@ $(function(){
         });
 
         addSkill.hide();
+
+
+        var url = "/partners/edit";
+        var data = {
+            name: editedName,
+            desc: editedDesc,
+            skills: skillsArr
+        };
+
+        backendPost(url, data, function (err, data) {
+            if(err)
+                console.log(err);
+            else
+                location.reload();
+        })
     }
 
     function showBtn(btn) {

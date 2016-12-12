@@ -3,13 +3,13 @@ body {
     background:#F7F7F7;
     color:#666666;
     font-family: 'Roboto', sans-serif;
-    font-weight:100;
+    font-weight:300;
 }
 
 body{
     width: 100%;
-    background: -webkit-linear-gradient(left, #22d686, #24d3d3, #22d686, #24d3d3);
-    background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
+    background: -webkit-linear-gradient(left, #ececec, #dfdfdf, #ececec, #dfdfdf);
+    background: linear-gradient(to right, #ececec, #dfdfdf, #ececec, #dfdfdf);
     background-size: 600% 100%;
     -webkit-animation: HeroBG 20s ease infinite;
     animation: HeroBG 20s ease infinite;

@@ -77,4 +77,39 @@ router.post('/post', function (req, res) {
     );
 });
 
+router.post('/edit', function (req, res) {
+    var data  = req.body;
+
+    Idea.findOneAndUpdate(
+        {'_id': data._id},
+        { $set: {
+            title: data.title,
+            shortDesc: data.shortDesc,
+            longDesc: data.longDesc,
+            skills: data.skills
+        }},
+        {safe: true, upsert: true, new : true},
+        function(err, model) {
+            if(err){
+                console.log(err)
+            } else {
+                res.send({success: true});
+            }
+        }
+    );
+});
+
+router.post('/delete', function (req, res) {
+
+    Idea.remove(
+        { _id: req.body._id },
+        function(err) {
+            if (err)
+                console.log(err)
+            else
+                res.send({url: "/partners/"+req.user.url});
+        }
+    );
+});
+
 module.exports = router;

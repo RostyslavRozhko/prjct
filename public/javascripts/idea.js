@@ -93,15 +93,18 @@ $(function(){
         showBtn(editBtn);
 
         editName.hide();
-        name.text(editName.val());
+        var title = editName.val();
+        name.text(title);
         name.show();
 
         editDesc.hide();
-        description.text(editDesc.val());
+        var shortDesc = editDesc.val();
+        description.text(shortDesc);
         description.show();
 
         editDescLong.hide();
-        descriptionLong.text(editDescLong.val());
+        var longDesc = editDescLong.val();
+        descriptionLong.text(longDesc);
         descriptionLong.show();
 
         $('.delete-btn').each(function () {
@@ -109,10 +112,54 @@ $(function(){
         });
 
         addSkill.hide();
+
+        var url = "/ideas/edit";
+        var data = {
+            _id: _id,
+            title: title,
+            shortDesc: shortDesc,
+            longDesc: longDesc,
+            skills: skillsArr
+        };
+
+        backendPost(url, data, function (err, data) {
+            if(err)
+                console.log(err);
+            else
+                location.reload();
+        })
     }
 
     function showBtn(btn) {
         btn.css('display', 'inline-block')
     }
+
+    function backendPost(url, data, callback) {
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType : 'application/json',
+            data: JSON.stringify(data),
+            success: function(data){
+                callback(null, data);
+            },
+            error: function() {
+                callback(new Error("Ajax Failed"));
+            }
+        })
+    }
+
+    $('#delete-btn').click(function () {
+        var url = "/ideas/delete";
+        var data  = {
+            _id: _id
+        };
+        backendPost(url , data, function (err, data) {
+            if(err)
+                console.log(err);
+            else
+                window.location.href = data.url;
+        })
+    });
 
 });

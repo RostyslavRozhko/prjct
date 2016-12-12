@@ -1,3 +1,8 @@
+*{
+  outline: none;
+}
+
+
 .container-fluid {
   padding: 0; }
 
@@ -13,7 +18,7 @@
 
 .navbar-logo, .navbar-element, .navbar-logo:hover, .navbar-element:hover {
   font-family: "Montserrat", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   color: black;
   text-decoration: none; }
@@ -95,7 +100,14 @@ a {
     border: 2px solid black;
     color: black;
     outline: none;
-    background: none; }
+    transition: 1s;
+    background: #dfdfdf; }
+
+#delete-btn{
+  background: #df3e3e;
+  color: white;
+  border: 2px solid #a00;
+}
 
 .btn-signup {
   padding-top: 8px; }
@@ -561,11 +573,11 @@ label {
 .panel-login>.panel-heading a#register-form-link {
   color: #fff;
   width: 100%;
-  text-align: right;
+  text-align: center;
 }
 .panel-login>.panel-heading a#login-form-link {
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
@@ -656,4 +668,8 @@ label {
 
 .idea-btn-row{
   margin-top: 25px;
+}
+
+.font-weight{
+  font-weight: 700;
 }

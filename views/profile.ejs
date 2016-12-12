@@ -25,8 +25,10 @@
                 <div class="text-info">
                     <span class="navbar-logo" id="profile-name"><%=partner.name%></span>
                     <input class="edit-name" type="text">
-                    <span class="some-btn edit-btn"></span>
-                    <span class="some-btn save-btn"></span>
+                    <% if(authUser && authUser._id+"" == partner._id+""){ %>
+                        <span class="some-btn edit-btn"></span>
+                        <span class="some-btn save-btn"></span>
+                    <%}%>
                     <div class="description" id="description"><%=partner.desc%></div>
                     <input type="text" class="edit-desc" placeholder="Add information about you"/>
                     <div id="skills-list">
@@ -36,8 +38,7 @@
             </div>
         </div>
     </div>
-    <%
-    if(authUser && authUser._id+"" == partner._id+""){ %>
+    <% if(authUser && authUser._id+"" == partner._id+""){ %>
     <div class="container">
         <div class="row">
             <div class="col-md-2 btn-con col-md-offset-3">

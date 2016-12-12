@@ -99,9 +99,10 @@ a {
   .btn-a:hover, .btn-a:active, .btn-a:focus {
     border: 2px solid black;
     color: black;
+    color: black;
     outline: none;
     transition: 1s;
-    background: #dfdfdf; }
+    background: rgba(249,249,251, 0.9); }
 
 #delete-btn{
   background: #df3e3e;
@@ -370,7 +371,8 @@ a {
     padding: 9px 3px;
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
-    color: black; }
+    color: black;
+  }
   .in-cont .add-btn {
     display: inline-block;
     height: 15px;
@@ -380,6 +382,12 @@ a {
     background-position: center;
     background-size: 15px 15px;
     background: url("../images/add.png"); }
+
+.in-cont .add-skill:hover, .in-cont .add-skill:focus {
+  outline: none;
+  border: 1px solid #a9a9a9;
+  padding: 9px 3px;
+}
 
 .profile-picture {
   width: 100%;
@@ -414,8 +422,10 @@ a {
       background-position: center;
       background-size: 25px 25px; }
     .profile-info .text-info .edit-btn {
+      margin-bottom: 5px;
       background-image: url("../images/edit.png"); }
     .profile-info .text-info .save-btn {
+      margin-bottom: 7px;
       display: none;
       background-image: url("../images/save.png"); }
     .profile-info .text-info .navbar-logo {
@@ -663,6 +673,7 @@ label {
 }
 
 .idea-panel-body{
+  margin-top: 25px;
   padding: 25px 15px;
 }
 
@@ -670,6 +681,10 @@ label {
   margin-top: 25px;
 }
 
-.font-weight{
+.font-weight:hover, .font-weight{
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
 }

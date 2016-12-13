@@ -11,6 +11,7 @@ var ideas = require('./routes/ideas');
 var partners = require('./routes/partners');
 var login = require('./routes/login');
 var register = require('./routes/register');
+var messages = require('./routes/messages');
 
 var mongoose = require('./db/db');
 var passport = require('passport');
@@ -121,6 +122,7 @@ app.use('/partners', partners);
 
 app.use('/login',  login);
 app.use('/register', register);
+app.use('/messages', messages);
 
 
 

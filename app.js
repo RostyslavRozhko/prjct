@@ -64,7 +64,6 @@ passport.use(new GoogleStrategy({
     function(accessToken, refreshToken, profile, done) {
         User.findOne({ 'googleID': profile.id }, function (err, user) {
             if(err) return done(err);
-
             if(user) {
                 done(null, user);
             } else {
@@ -77,9 +76,7 @@ passport.use(new GoogleStrategy({
                     console.log('New User: ' + newUser.username + ' created and logged in!');
                     done(null, newUser);
                 });
-            } else {
-                done(null, null);
-            }
+            } 
         });
     }
 ));

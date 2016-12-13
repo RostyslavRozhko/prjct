@@ -59,24 +59,33 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
       clientID: "694329244278-lbf1v6mpoef6kqfqc6rpfh0ogpvlfvmb.apps.googleusercontent.com",
       clientSecret: "ZuRR8NmJf9dNnWJQZkcvFWOc",
-      callbackURL: "http://prjct.rostyslavr.com/auth/google/callback"
+      callbackURL: "http://127.0.0.1:3000/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        User.findOne({ 'googleID': profile.id }, function (err, user) {
-            if(err) return done(err);
-            if(user) {
-                done(null, user);
+        User.findOne({ 'googleId' : profile.id }, function(err, user) {
+            if (err)
+                return done(err);
+            if (user) {
+                // if a user is found, log them in
+                return done(null, user);
             } else {
+                // if the user isnt in our database, create a new user
                 var newUser = new User();
-                console.log(profile);
-                newUser._id = profile.id;
 
+                // set all of the relevant information
+                newUser._id  = mongoose.Types.ObjectId();
+                newUser.name  = profile.displayName;
+                newUser.url = profile.displayName.replace(/\s/g,'').toLowerCase()+"g";
+                newUser.email = profile.emails[0].value;
+                newUser.img = profile.photos[0].value;
+
+                // save the user
                 newUser.save(function(err) {
-                    if(err) throw err;
-                    console.log('New User: ' + newUser.username + ' created and logged in!');
-                    done(null, newUser);
+                    if (err)
+                        throw err;
+                    return done(null, newUser);
                 });
-            } 
+            }
         });
     }
 ));

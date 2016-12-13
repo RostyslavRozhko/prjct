@@ -11,7 +11,8 @@ var userSchema = new mongoose.Schema({
         ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ideas' }],
         skills: Array,
         name: String,
-        url: String
+        url: String,
+        googleId: String
     },
     {collection: 'users'});
 

@@ -15,6 +15,7 @@ var register = require('./routes/register');
 var mongoose = require('./db/db');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
 var app = express();
@@ -55,6 +56,21 @@ passport.use(new LocalStrategy({
   });
 }));
 
+passport.use(new GoogleStrategy({
+      clientID: "694329244278-lbf1v6mpoef6kqfqc6rpfh0ogpvlfvmb.apps.googleusercontent.com",
+      clientSecret: "ZuRR8NmJf9dNnWJQZkcvFWOc",
+      callbackURL: "http://prjct.rostyslavr.com/auth/google/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      User.findOrCreate({
+        googleId: profile.id
+
+      }, function (err, user) {
+        return done(err, user);
+      });
+    }
+));
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -67,6 +83,17 @@ passport.deserializeUser(function(id, done) {
         : done(null,user);
   });
 });
+
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['email profile'] })
+);
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    });
+
 
 app.use('/', index);
 app.use('/ideas', ideas);

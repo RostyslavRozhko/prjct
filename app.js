@@ -74,6 +74,7 @@ passport.use(new GoogleStrategy({
 
                 // set all of the relevant information
                 newUser._id  = mongoose.Types.ObjectId();
+                newUser.googleId = profile.id;
                 newUser.name  = profile.displayName;
                 newUser.url = profile.displayName.replace(/\s/g,'').toLowerCase()+"g";
                 newUser.email = profile.emails[0].value;

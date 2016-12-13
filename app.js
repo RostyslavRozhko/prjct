@@ -62,12 +62,25 @@ passport.use(new GoogleStrategy({
       callbackURL: "http://prjct.rostyslavr.com/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-      User.findOrCreate({
-        googleId: profile.id
+        User.findOne({ 'googleID': profile.id }, function (err, user) {
+            if(err) return done(err);
 
-      }, function (err, user) {
-        return done(err, user);
-      });
+            if(user) {
+                done(null, user);
+            } else {
+                var newUser = new User();
+                console.log(profile);
+                newUser._id = profile.id;
+
+                newUser.save(function(err) {
+                    if(err) throw err;
+                    console.log('New User: ' + newUser.username + ' created and logged in!');
+                    done(null, newUser);
+                });
+            } else {
+                done(null, null);
+            }
+        });
     }
 ));
 

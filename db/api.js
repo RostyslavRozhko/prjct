@@ -108,17 +108,37 @@ exports.getChatsById = function (id, callback) {
 };
 
 exports.searchChat = function (user1, user2, callback) {
-    Users.findOne({_id:user1, chats: user2})
-        .exec(function (err, ideas) {
+    Users.findOne({_id:user1, "chats.to": user2})
+        .exec(function (err, user) {
             if(err){
                 onErr(err,callback);
-            }else{
-                callback(null, ideas);
+            }else if(user){
+                console.log(user);
+                console.log("user found");
+                user.chats.forEach(function (one) {
+                    console.log(one.to, user2);
+                    if(one.to+"" == user2+"") {
+                        console.log(one.messages);
+                        callback(null, one.messages);
+                    }
+                });
+            } else {
+                console.log("user not found");
+                console.log(1, user1, user2);
+                createChat(user1, user2, function (err, chatId) {
+                    if(err)
+                        console.log(err);
+                    else {
+                        console.log(chatId);
+                        callback(null, chatId)
+                    }
+                })
             }
         });
 };
 
-exports.createChat = function (user1, user2, callback) {
+var createChat = function (user1, user2, callback) {
+    console.log(2, user1, user2);
     var chatId = mongoose.Types.ObjectId();
     var chat = new Chats({
         _id: chatId
@@ -129,12 +149,14 @@ exports.createChat = function (user1, user2, callback) {
         else{
             addChatToUser(user1, user2, chatId);
             addChatToUser(user2, user1, chatId);
+            callback(null, chatId);
         }
 
     });
 
 
     function addChatToUser(user1, user2, chatId) {
+        console.log(3,user1, user2);
         Users.findOneAndUpdate(
             {'_id': user1},
             { $push: {
@@ -148,7 +170,7 @@ exports.createChat = function (user1, user2, callback) {
                 if(err){
                     onErr(err,callback);
                 } else {
-                    callback(null, model);
+                    ;
                 }
             }
         );

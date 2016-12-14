@@ -162,4 +162,18 @@ $(function(){
         })
     });
 
+    $('#send-btn').click(function () {
+        var url = "/messages/createChat";
+        var data = {
+            href: $(this).data("href")
+        };
+
+        backendPost(url , data, function (err, data) {
+            if(err)
+                console.log(err);
+            else
+                window.location.href = "/messages/"+data.url;
+        })
+    });
+
 });

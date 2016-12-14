@@ -45,7 +45,7 @@
                     <a class="btn btn-a" id="save-btn">Save</a>
                     <a class="btn btn-a" id="delete-btn">Delete idea</a>
                 <%} else {%>
-                    <a class="btn btn-a" id="send-btn">Send a message</a>
+                    <a class="btn btn-a" data-href="<%=idea.author._id%>" id="send-btn">Send a message</a>
                 <%}%>
             </div>
         </div>

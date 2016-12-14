@@ -46,12 +46,25 @@ router.post("/send", function (req, res) {
     var messageBody = {
         author: req.user._id,
         body: req.body.body
-    }
+    };
     db.postMessage(req.body.id, messageBody, function (err, data) {
         if(err)
             console.log(err);
         else {
             res.redirect('/messages/'+req.body.id);
+        }
+    })
+});
+
+router.post('/createChat/', function (req, res) {
+    var id = req.body.href;
+    console.log("ajax-came", "id: ", id);
+    db.searchChat(id, req.user._id, function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("before redirect");
+            res.send({url: data});
         }
     })
 });

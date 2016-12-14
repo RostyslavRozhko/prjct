@@ -16,71 +16,21 @@
     <div class="row">
         <div class="col-md-4">
             <div class="chats">
-                <div class="messages-chat active">
-                    <img src="/images/account-icon-8.png" class="pull-left message-img">
-                    <div class="chat-text-container clearfix pull-left">
-                        <span class="author">Ruslan Purii</span>
-                        <div class="last-message">I am interested in your project</div>
-                    </div>
-                </div>
+                <% chats.chats.forEach(function (one) { %>
                 <div class="messages-chat">
-                    <img src="/images/account-icon-8.png" class="pull-left message-img">
-                    <div class="chat-text-container clearfix pull-left">
-                        <span class="author">Ruslan Purii2</span>
-                        <div class="last-message">I am interested in your project</div>
-                    </div>
-                </div>
-                <div class="messages-chat">
-                    <img src="/images/account-icon-8.png" class="pull-left message-img">
-                    <div class="chat-text-container clearfix pull-left">
-                        <span class="author">Ruslan Purii3</span>
-                        <div class="last-message">I am interested in your project</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="messages-row">
-                <div class="message">
-                    <div class="clearfix">
+                    <a href="/messages/<%=one.messages._id%>">
+                        <% if(one.to.img) {%>
+                        <img src="<%=one.to.img%>" class="pull-left message-img">
+                        <%} else {%>
                         <img src="/images/account-icon-8.png" class="pull-left message-img">
-                        <span style="display: inline-block" class="pull-left">
-                            <div class="chat-text-container clearfix pull-left">
-                                <span class="author">Ruslan Purii</span>
-                                <span class="date">15:26</span>
-                                <span class="message-body">
-                                    <p>I am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your projectI am interested in your project</p>
-                                </span>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <div class="message">
-                    <div class="clearfix">
-                        <img src="/images/account-icon-8.png" height="40px" class="pull-left">
-                        <span style="display: inline-block" class="pull-left">
-                            <div class="chat-text-container clearfix pull-left">
-                                <span class="author">Rostyslav Rozhko</span>
-                                <span class="date">15:36</span>
-                                <div class="message-body">
-                                    <p>Oh, great!</p>
-                                </div>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="messages-input-container">
-                <div class="messages-input">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="" method="post" role="form">
-                                <input type="text" placeholder="Enter your message">
-                                <input type="submit" class="btn-register form-control btn" value="Send">
-                            </form >
+                        <% } %>
+                        <div class="chat-text-container clearfix pull-left">
+                            <span class="author"><%=one.to.name%></span>
+                            <div class="last-message">I am interested in your project</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
+                <% }) %>
             </div>
         </div>
     </div>

@@ -1,0 +1,81 @@
+<% var title = title %>
+<%include includes/head.ejs %>
+
+<body>
+<div class="container-fluid border-bottom">
+    <div class="container">
+        <% if(authUser) { %>
+        <% include includes/navbar-logined.ejs %>
+        <% } else {%>
+        <% include includes/navbar.ejs %>
+        <%}%>
+    </div>
+</div>
+
+<div class="container messeges-app-container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="chats">
+                <% chats.chats.forEach(function (one) { %>
+                <div class="messages-chat">
+                    <a href="/messages/<%=one.messages._id%>">
+                        <% if(one.to.img) {%>
+                        <img src="<%=one.to.img%>" class="pull-left message-img">
+                        <%} else {%>
+                        <img src="/images/account-icon-8.png" class="pull-left message-img">
+                        <% } %>
+                        <div class="chat-text-container clearfix pull-left">
+                            <span class="author"><%=one.to.name%></span>
+                            <div class="last-message">I am interested in your project</div>
+                        </div>
+                    </a>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="messages-row">
+                <% chat.messages.forEach(function (one) { %>
+                <div class="message">
+                    <div class="clearfix">
+                        <% if(one.author.img) {%>
+                        <img src="<%=one.author.img%>" class="pull-left message-img">
+                        <%} else {%>
+                        <img src="/images/account-icon-8.png" class="pull-left message-img">
+                        <% } %>
+                        <span style="display: inline-block" class="pull-left">
+                            <div class="chat-text-container clearfix pull-left">
+                                <span class="author"><%=one.author.name%></span>
+                                <span class="date"><%=one.date.getHours() + ":" + (one.date.getMinutes() < 10 ? '0'+one.date.getMinutes() : one.date.getMinutes())%></span>
+                                <div class="message-body">
+                                    <p><%=one.body%></p>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            <div class="messages-input-container">
+                <div class="messages-input">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/messages/send" method="post" role="form">
+                                <input type="text" name="id" value="<%=chat._id%>" style="display: none">
+                                <input type="text" name="body" placeholder="Enter your message">
+                                <input type="submit" class="btn-register form-control btn" value="Send">
+                            </form >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include includes/footer.ejs %>
+
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+</body>
+</html>

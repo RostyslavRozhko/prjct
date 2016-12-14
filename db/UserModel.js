@@ -9,6 +9,12 @@ var userSchema = new mongoose.Schema({
         password: String,
         img: String,
         ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ideas' }],
+        chats: [
+                {
+                        to: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
+                        messages: {type: mongoose.Schema.Types.ObjectId, ref: 'Chats'}
+                }
+        ],
         skills: Array,
         name: String,
         url: String,

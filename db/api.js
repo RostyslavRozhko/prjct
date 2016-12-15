@@ -197,3 +197,44 @@ exports.postMessage = function(chatId, message, callback){
         }
     );
 };
+
+exports.findLocalUser = function (username, password, callback) {
+    Users.findOne({ email : username},function(err,user){
+        return err
+            ? callback(err)
+            : user
+            ? password === user.password
+            ? callback(null, user)
+            : callback(null, false, { message: 'Incorrect password.' })
+            : callback(null, false, { message: 'Incorrect username.' });
+    });
+};
+
+exports.findOrCreateGoogleUser = function (accessToken, refreshToken, profile, done) {
+    Users.findOne({ 'googleId' : profile.id }, function(err, user) {
+        if (err)
+            return done(err);
+        if (user) {
+            // if a user is found, log them in
+            return done(null, user);
+        } else {
+            // if the user isnt in our database, create a new user
+            var newUser = new User();
+
+            // set all of the relevant information
+            newUser._id  = mongoose.Types.ObjectId();
+            newUser.googleId = profile.id;
+            newUser.name  = profile.displayName;
+            newUser.url = profile.displayName.replace(/\s/g,'').toLowerCase()+"g";
+            newUser.email = profile.emails[0].value;
+            newUser.img = profile.photos[0].value+"0";
+
+            // save the user
+            newUser.save(function(err) {
+                if (err)
+                    throw err;
+                return done(null, newUser);
+            });
+        }
+    });
+};

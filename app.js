@@ -14,6 +14,7 @@ var register = require('./routes/register');
 var messages = require('./routes/messages');
 
 var mongoose = require('./db/db');
+var db = require('./db/api');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -46,49 +47,16 @@ passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, function(username, password,done){
-  User.findOne({ email : username},function(err,user){
-    return err
-        ? done(err)
-        : user
-        ? password === user.password
-        ? done(null, user)
-        : done(null, false, { message: 'Incorrect password.' })
-        : done(null, false, { message: 'Incorrect username.' });
-  });
+    db.findLocalUser(username, password, done)
 }));
 
 passport.use(new GoogleStrategy({
       clientID: "694329244278-lbf1v6mpoef6kqfqc6rpfh0ogpvlfvmb.apps.googleusercontent.com",
       clientSecret: "ZuRR8NmJf9dNnWJQZkcvFWOc",
-      callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+      callbackURL: "http://127.0.0.1:3000/login/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        User.findOne({ 'googleId' : profile.id }, function(err, user) {
-            if (err)
-                return done(err);
-            if (user) {
-                // if a user is found, log them in
-                return done(null, user);
-            } else {
-                // if the user isnt in our database, create a new user
-                var newUser = new User();
-
-                // set all of the relevant information
-                newUser._id  = mongoose.Types.ObjectId();
-                newUser.googleId = profile.id;
-                newUser.name  = profile.displayName;
-                newUser.url = profile.displayName.replace(/\s/g,'').toLowerCase()+"g";
-                newUser.email = profile.emails[0].value;
-                newUser.img = profile.photos[0].value+"0";
-
-                // save the user
-                newUser.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, newUser);
-                });
-            }
-        });
+        db.findOrCreateGoogleUser(accessToken, refreshToken, profile, done);
     }
 ));
 
@@ -104,16 +72,6 @@ passport.deserializeUser(function(id, done) {
         : done(null,user);
   });
 });
-
-app.get('/auth/google',
-    passport.authenticate('google', { scope: ['email profile'] })
-);
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function(req, res) {
-      res.redirect('/');
-    });
 
 
 app.use('/', index);

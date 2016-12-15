@@ -25,6 +25,17 @@ router.post('/', passport.authenticate('local'), function(req, res, next) {
     )(req, res, next);
 });
 
+router.get('/google',
+    passport.authenticate('google', { scope: ['email profile'] })
+);
+
+router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+        res.redirect('/');
+    });
+
+
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');

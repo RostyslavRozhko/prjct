@@ -1,0 +1,30 @@
+<% var title = title %>
+<%include includes/head.ejs %>
+
+<body>
+<div class="container-fluid border-bottom">
+    <div class="container">
+        <% if(authUser) {
+            var authUser = authUser;
+        %>
+        <% include includes/navbar-logined.ejs %>
+        <% } else {%>
+        <% include includes/navbar.ejs %>
+        <%}%>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center vertical-offset">
+            <div class="small-label">an error occured</div>
+            <div class="small-label error-message">your password is not valid</div>
+            <div class="big-label">Sorry</div>
+            <a class="btn btn-a">go back</a>
+        </div>
+    </div>
+</div>
+
+<% include includes/footer.ejs %>
+</body>
+</html>

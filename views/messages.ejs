@@ -15,6 +15,7 @@
 <div class="container messeges-app-container">
     <div class="row">
         <div class="col-md-4">
+            <%if(chats){%>
             <div class="chats">
                 <% chats.chats.forEach(function (one) { %>
                 <div class="messages-chat">
@@ -31,6 +32,9 @@
                 </div>
                 <% }) %>
             </div>
+            <%} else {%>
+            <p>There no conversations yet.</p>
+            <%}%>
         </div>
     </div>
 </div>

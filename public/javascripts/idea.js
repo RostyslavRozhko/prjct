@@ -169,7 +169,8 @@ $(function(){
         };
 
         backendPost(url , data, function (err, data) {
-            if(err)window.location.href = "/login"
+            if(err)
+                window.location.href = "/login";
             else
                 window.location.href = "/messages/"+data.url;
         })

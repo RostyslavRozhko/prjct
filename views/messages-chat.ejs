@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <div class="chats">
                 <% chats.chats.forEach(function (one) { %>
-                <%if(one.messages._id+""==chat._id+""){%>
+                <%if(one.messages._id+""==chatId+""){%>
                     <div class="messages-chat active">
                     <%} else {%>
                     <div class="messages-chat">
@@ -37,35 +37,15 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="messages-row">
-                <% chat.messages.forEach(function (one) { %>
-                <div class="message">
-                    <div class="clearfix">
-                        <% if(one.author.img) {%>
-                        <img src="<%=one.author.img%>" class="pull-left message-img">
-                        <%} else {%>
-                        <img src="/images/account-icon-8.png" class="pull-left message-img">
-                        <% } %>
-                        <span style="display: inline-block" class="pull-left">
-                            <div class="chat-text-container clearfix pull-left">
-                                <span class="author"><%=one.author.name%></span>
-                                <span class="date"><%=one.date.getHours() + ":" + (one.date.getMinutes() < 10 ? '0'+one.date.getMinutes() : one.date.getMinutes())%></span>
-                                <div class="message-body">
-                                    <p><%=one.body%></p>
-                                </div>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <% }) %>
+            <div class="messages-row" data-id = "<%=chatId%>" >
+
             </div>
             <div class="messages-input-container">
                 <div class="messages-input">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/messages/send" method="post" role="form">
-                                <input type="text" name="id" value="<%=chat._id%>" style="display: none">
-                                <input type="text" name="body" placeholder="Enter your message">
+                            <form id="myForm">
+                                <input type="text" id="body" placeholder="Enter your message">
                                 <input type="submit" class="btn-register form-control btn" value="Send">
                             </form >
                         </div>
@@ -75,10 +55,29 @@
         </div>
     </div>
 </div>
+</div>
+
+<div style="display: none" id="template">
+    <div class="message">
+        <div class="clearfix">
+            <img src="/images/account-icon-8.png" class="pull-left message-img">
+            <span style="display: inline-block" class="pull-left">
+                            <div class="chat-text-container clearfix pull-left">
+                                <span class="author"></span>
+                                <span class="date"></span>
+                                <div class="message-body">
+                                    <p></p>
+                                </div>
+                            </div>
+                        </span>
+        </div>
+    </div>
+</div>
 
 
 <% include includes/footer.ejs %>
 
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/messages.js"></script>
 </body>
 </html>

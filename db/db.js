@@ -15,9 +15,4 @@ mongoose.connection.on('disconnected', function () {
     console.log('Mongoose default connection disconnected');
 });
 
-var onErr = function(err,callback){
-    mongoose.connection.close();
-    callback(err);
-};
-
 module.exports = mongoose;

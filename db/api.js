@@ -3,6 +3,11 @@ var Users = require('./UserModel');
 var Chats = require('./ChatModel');
 var mongoose = require('./db');
 
+var onErr = function(err,callback){
+    mongoose.connection.close();
+    callback(err);
+};
+
 exports.getAllIdeas = function (callback) {
     Ideas.find({})
         .populate('author')
@@ -25,6 +30,18 @@ exports.getSearchIdeas = function (query, callback) {
                 onErr(err,callback);
             }else{
                 callback(null, ideas);
+            }
+        })
+};
+
+exports.getSearchUsers = function (query, callback) {
+    Users.find({skills: query})
+        .sort('-createAt')
+        .exec(function (err, users) {
+            if(err){
+                onErr(err,callback);
+            }else{
+                callback(null, users);
             }
         })
 };
@@ -196,6 +213,19 @@ exports.postMessage = function(chatId, message, callback){
             }
         }
     );
+};
+
+exports.getMessages = function(chatId, callback){
+    Chats.findOne({'_id': chatId})
+        .populate('messages.author', 'name img url')
+        .exec(function (err, chat) {
+            if(err)
+                onErr(err,callback);
+            else
+                callback(null, chat);
+        })
+
+
 };
 
 exports.findLocalUser = function (username, password, callback) {

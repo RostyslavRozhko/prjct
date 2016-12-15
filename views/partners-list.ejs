@@ -28,7 +28,7 @@
     <div class="ideas-box">
         <div class="container">
             <div class="search-bar">
-                <input type="search" placeholder="Search partner with the following skills" class="search">
+                <input type="search" value="<%=query%>" placeholder="Search partner with the following skills" class="search" autofocus  onfocus="this.value = this.value;">
             </div>
             <div class="list">
                 <div class="row">
@@ -45,6 +45,7 @@
 </div>
 
 <% include includes/footer.ejs %>
-
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/main.js"></script>
 </body>
 </html>

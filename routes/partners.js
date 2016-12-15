@@ -4,13 +4,25 @@ var router = express.Router();
 var User = require('../db/UserModel');
 
 router.get('/', function(req, res, next) {
-    db.getAllUsers(function (err, partners) {
-        if(err){
-            console.log("Error")
-        } else {
-            res.render('partners-list', { title: 'Partners', partners: partners, authUser: req.user });
-        }
-    });
+    var qu = req.query.search;
+    var query = new RegExp(qu, "i");
+    if (!query) {
+        db.getAllUsers(function (err, partners) {
+            if(err){
+                console.log("Error")
+            } else {
+                res.render('partners-list', { title: 'Partners', partners: partners, authUser: req.user });
+            }
+        });
+    } else {
+        db.getSearchUsers(query, function (err, partners) {
+            if (err) {
+                console.log("Error")
+            } else {
+                res.render('partners-list', { title: 'Partners', partners: partners, authUser: req.user, query: qu });
+            }
+        });
+    }
 
 });
 

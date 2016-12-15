@@ -3,14 +3,15 @@
         <a class="navbar-brand font-weight" href="/">logo</a>
     </div>
     <div class="pull-right">
-        <a class="navbar-brand messages-icon-padding" style="padding: 16px 0 0 0;"><img class="messages-icon" src="https://freeiconshop.com/files/edd/mail-solid.png"></a>
-        <a class="navbar-brand navbar-logo" href="/messages">Messages</a>
+        <a class="navbar-brand messages-icon-padding" href="/messages" style="padding: 16px 0 0 0;"><img class="messages-icon" src="https://freeiconshop.com/files/edd/mail-solid.png"></a>
+        <a class="navbar-brand navbar-logo hidden-xs" href="/messages">Messages</a>
+        <span class="navbar-brand navbar-logo visible-xs vis-xs"></span>
         <% if(authUser.img) {%>
         <a class="navbar-brand user-img-small-round-padding" href="/partners/<%=authUser.url%>"><img class="user-img-small-round" src="<%=authUser.img%>"></a>
         <%} else {%>
         <a class="navbar-brand user-img-small-round-padding" href="/partners/<%=authUser.url%>"><img class="user-img-small-round" src="/images/account-icon-8.png"></a>
         <% } %>
-        <a class="navbar-brand navbar-logo" href="/partners/<%=authUser.url%>"><%=authUser.name%></a>
+        <a class="navbar-brand navbar-logo hidden-xs" href="/partners/<%=authUser.url%>"><%=authUser.name%></a>
         <a class="navbar-brand navbar-logo" href="/login/logout">Log out</a>
     </div>
 </nav>

@@ -249,7 +249,7 @@ exports.findOrCreateGoogleUser = function (accessToken, refreshToken, profile, d
             return done(null, user);
         } else {
             // if the user isnt in our database, create a new user
-            var newUser = new User();
+            var newUser = new Users();
 
             // set all of the relevant information
             newUser._id  = mongoose.Types.ObjectId();

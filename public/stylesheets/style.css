@@ -400,6 +400,7 @@ a {
   padding: 30px; }
 
 .profile-info {
+  height: 90vh;
   padding-top: 70px;
   padding-left: 15px;
   padding-right: 15px;

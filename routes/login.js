@@ -6,7 +6,10 @@ var router = express.Router();
 
 
 router.get('/', function(req, res) {
-    res.render('login', { title: "Login", user : req.user });
+    if(req.user)
+        res.redirect("/");
+    else
+        res.render('login', { title: "Login", user : req.user });
 });
 
 router.post('/', passport.authenticate('local'), function(req, res, next) {

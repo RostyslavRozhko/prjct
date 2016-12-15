@@ -5,7 +5,10 @@ var mongoose  = require('../db/db');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-    res.render('register', { title: 'Register'});
+    if(req.user)
+        res.redirect("/");
+    else
+        res.render('register', { title: 'Register'});
 });
 
 router.post('/', function(req, res, next) {
@@ -16,7 +19,8 @@ router.post('/', function(req, res, next) {
         name: req.body.username,
         url: req.body.username.replace(/\s/g,'').toLowerCase(),
         desc: req.body.description,
-        img:null
+        img:null,
+        chats: [{ messages: "585198a0b3930e18c0bd0000", to: "584feb58484a5a26d0a5ac29" }]
     });
     user.save(function (err) {
         return err

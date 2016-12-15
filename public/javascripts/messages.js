@@ -2,7 +2,7 @@ $(function () {
 
     var $messages = $('.messages-row');
 
-    var template = $('#template').html();
+    var template = '<div class="message"><a><div class="clearfix"><img src="/images/account-icon-8.png" class="pull-left message-img"></a><span style="display: inline-block" class="pull-left"><div class="chat-text-container clearfix pull-left"><span class="author"></span><span class="date"></span><div class="message-body"><p></p></div></div></span></div></div>';
 
     function showAllMessages(array) {
         $messages.text("");
@@ -12,6 +12,9 @@ $(function () {
             var node = $(template);
 
             node.find('.author').text(message.author.name);
+            node.find('a').attr("href", "/partners/"+message.author.url);
+            if(message.author.img)
+                node.find('img').attr("src", message.author.img);
             var date = new Date(message.date);
             date =  date.getHours() + ":" + (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes());
             node.find('.date').text(date);
@@ -49,7 +52,8 @@ $(function () {
     };
 
     $('#myForm').submit(function () {
-        postMessage();
+        if($('#body').val() != "")
+            postMessage();
 
         return false;
     });

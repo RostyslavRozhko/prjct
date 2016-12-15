@@ -53,7 +53,7 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
       clientID: "694329244278-lbf1v6mpoef6kqfqc6rpfh0ogpvlfvmb.apps.googleusercontent.com",
       clientSecret: "ZuRR8NmJf9dNnWJQZkcvFWOc",
-      callbackURL: "http://127.0.0.1:3000/login/google/callback"
+      callbackURL: "http://prjct.rostyslavr.com/login/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         db.findOrCreateGoogleUser(accessToken, refreshToken, profile, done);

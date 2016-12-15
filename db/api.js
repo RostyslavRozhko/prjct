@@ -34,18 +34,6 @@ exports.getSearchIdeas = function (query, callback) {
         })
 };
 
-exports.getSearchUsers = function (query, callback) {
-    Users.find({skills: query})
-        .sort('-createAt')
-        .exec(function (err, users) {
-            if(err){
-                onErr(err,callback);
-            }else{
-                callback(null, users);
-            }
-        })
-};
-
 
 exports.getIndexIdeas = function (callback) {
     Ideas.find({})
@@ -75,6 +63,18 @@ exports.getIdeaByName = function (name, callback) {
 
 exports.getAllUsers = function (callback) {
     Users.find({})
+        .sort('-createAt')
+        .exec(function (err, users) {
+            if(err){
+                onErr(err,callback);
+            }else{
+                callback(null, users);
+            }
+        })
+};
+
+exports.getSearchUsers = function (query, callback) {
+    Users.find({skills: query})
         .sort('-createAt')
         .exec(function (err, users) {
             if(err){

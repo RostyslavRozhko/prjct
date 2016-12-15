@@ -751,6 +751,28 @@ label {
   font-size: 14px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+  margin: 0 5px;
+}
+
+.messages-row p{
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  margin-top: 35vh;
+  text-align: center;
+}
+
+@media screen and (max-width: 970px){
+    .chats{
+      border: none;
+    }
+}
+
+@media screen and (max-width: 768px){
+
+  .messages-input input[type="text"]{
+    border: 1px solid lightgrey !important;
+  }
 }
 
 .message-img{
@@ -830,4 +852,13 @@ label {
   width: 5px;
   height: 5px;
   padding: 7px;
+}
+
+
+.row-class{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
 }

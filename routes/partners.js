@@ -1,6 +1,8 @@
 var express = require('express');
 var db = require('../db/api');
 var router = express.Router();
+var fs = require('fs');
+var path = require('path');
 var User = require('../db/UserModel');
 
 router.get('/', function(req, res, next) {
@@ -50,6 +52,27 @@ router.get('/:id/post', function (req, res, next) {
                 res.redirect('/partners/'+id);
         }
     });
+});
+
+router.post("/edit/upload/image", function (req, res) {
+    if(req.user) {
+        req.pipe(req.busboy);
+        req.busboy.on('file', function (fieldname, file, filename) {
+            console.log("Uploading: " + filename);
+            var fstr = fs.createWriteStream(path.resolve(".") + '/public/files/' + filename);
+            file.pipe(fstr);
+            fstr.on('close', function () {
+                db.updateUserImage(req.user._id, filename, function (err, data) {
+                    if (err)
+                        console.log(err);
+                    else
+                        res.redirect('/partners/' + req.user.url);
+                })
+            });
+        });
+    }
+    else
+        res.redirect("/")
 });
 
 router.post('/edit', function (req, res) {

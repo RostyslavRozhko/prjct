@@ -181,4 +181,8 @@ $(function(){
         })
     }
 
+    $("#fileUpload").onchange = function() {
+        $("#formImageUpload").submit();
+    };
+
 });

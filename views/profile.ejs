@@ -19,6 +19,14 @@
                     <img class="profile-picture" src="<%=partner.img%>">
                 <%} else {%>
                     <img class="profile-picture" src="/images/account-icon-8.png">
+                    <% if(authUser && authUser._id+"" == partner._id+""){ %>
+                        <form action="/partners/edit/upload/image" method="post" enctype='multipart/form-data' id="formImageUpload">
+                            <label class="fileContainer">
+                                <h4>Choose a profile image</h4>
+                                <input type='file' id="fileUpload" name='image'/>
+                            </label>
+                        </form>
+                    <%}%>
                 <% } %>
             </div>
             <div class="col-md-7 col-md-offset-1 text-info-cont">

@@ -269,3 +269,21 @@ exports.findOrCreateGoogleUser = function (accessToken, refreshToken, profile, d
         }
     });
 };
+
+
+exports.updateUserImage = function (id, imgName, callback) {
+    Users.findOneAndUpdate(
+        {'_id': id},
+        { $set: {
+            img: "/files/" + imgName
+        }},
+        {safe: true, upsert: true, new : true},
+        function(err, model) {
+            if(err){
+                onErr(err,callback);
+            } else {
+                callback(null, model);
+            }
+        }
+    );
+};

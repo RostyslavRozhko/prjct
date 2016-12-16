@@ -258,7 +258,7 @@ exports.findOrCreateGoogleUser = function (accessToken, refreshToken, profile, d
             newUser.url = profile.displayName.replace(/\s/g,'').toLowerCase()+"g";
             newUser.email = profile.emails[0].value;
             newUser.img = profile.photos[0].value+"0";
-            newUser.chat = [{ messages: "585198a0b3930e18c0bd0000", to: "584feb58484a5a26d0a5ac29" }];
+            newUser.chats = [{ messages: "585198a0b3930e18c0bd0000", to: "584feb58484a5a26d0a5ac29" }];
 
             // save the user
             newUser.save(function(err) {
@@ -269,7 +269,6 @@ exports.findOrCreateGoogleUser = function (accessToken, refreshToken, profile, d
         }
     });
 };
-
 
 exports.updateUserImage = function (id, imgName, callback) {
     Users.findOneAndUpdate(

@@ -47,9 +47,7 @@ $(function () {
         })
     }
 
-    window.onload = function () {
-        init();
-    };
+    init();
 
     $('#myForm').submit(function () {
         if($('#body').val() != "")

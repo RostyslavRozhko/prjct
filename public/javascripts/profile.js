@@ -13,14 +13,14 @@ $(function(){
 
     var $skillNode = '<span><span class="skill">HTML5</span><span class="delete-btn"></span></span>';
 
+    var editable = false;
 
     if(name == "" || skillsArr.length == 0){
+        editable = true;
         editProfile();
     }
 
     showSkills(skillsArr);
-
-    var editable = false;
 
     function showSkills(array) {
         SKILLS_LIST.empty();

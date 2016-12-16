@@ -33,13 +33,20 @@
                 <input type="search" value="<%=query%>" placeholder="Search projects with the following skills" class="search" autofocus  onfocus="this.value = this.value;">
             </div>
             <div class="list">
-                <div class="row row-class">
+                <div class="row row-class hidden-xs">
 
                     <% ideas.forEach(function (idea) {
                         var idea = idea; %>
                         <% include includes/idea-card.ejs %>
                     <% })%>
 
+                </div>
+
+                <div class="row visible-xs">
+                    <% ideas.forEach(function (idea) {
+                        var idea = idea; %>
+                    <% include includes/idea-card.ejs %>
+                    <% })%>
                 </div>
             </div>
         </div>

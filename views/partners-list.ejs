@@ -31,13 +31,20 @@
                 <input type="search" value="<%=query%>" placeholder="Search partner with the following skills" class="search" autofocus  onfocus="this.value = this.value;">
             </div>
             <div class="list">
-                <div class="row row-class">
+                <div class="row row-class hidden-xs">
 
                     <% partners.forEach(function (idea) {
                         var partner = idea; %>
                     <% include includes/partner-card.ejs %>
                     <% })%>
 
+                </div>
+
+                <div class="row visible-xs">
+                    <% partners.forEach(function (idea) {
+                        var partner = idea; %>
+                    <% include includes/partner-card.ejs %>
+                    <% })%>
                 </div>
             </div>
         </div>

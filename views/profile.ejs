@@ -67,8 +67,7 @@
                 <div class="line"></div>
             </div>
             <div class="list">
-                <div class="row">
-
+                <div class="row row-class hidden-xs">
 
                     <%if(partner.ideas.length == 0) { %>
                     <p class="no-projects">There are no projects yet</p>
@@ -78,6 +77,16 @@
                     <% include includes/idea-card.ejs %>
                     <% }) }%>
 
+                </div>
+
+                <div class="row visible-xs">
+                    <%if(partner.ideas.length == 0) { %>
+                    <p class="no-projects">There are no projects yet</p>
+                    <%} else {%>
+                    <% partner.ideas.reverse().forEach(function (idea) {
+                        var idea = idea; %>
+                    <% include includes/idea-card.ejs %>
+                    <% }) }%>
                 </div>
             </div>
         </div>
